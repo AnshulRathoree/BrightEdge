@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BrightEdge Digital Solutions</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+  
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #f4f6f8;
+      color: #333;
+      line-height: 1.65;
+    }
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 50px;
+    }
+    nav .logo a {
+      font-family: 'Montserrat', sans-serif;
+      color: #ffce00;
+      font-size: 1.8rem;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    nav .menu a {
+      font-family: 'Montserrat', sans-serif;
+      color: #fff;
+      text-decoration: none;
+      margin-left: 30px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav .menu a:hover {
+      color: #ffce00;
+    }
+
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: url('https://cdn.leonardo.ai/users/333d04db-46c1-41eb-916f-4f6de4a6ad45/generations/39b4be87-83d8-4ce4-b562-0f8c741546b8/segments/3:4:1/Flux_Dev_A_futuristic_workspace_filled_with_cuttingedge_techno_2.jpeg') no-repeat center center/cover;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.65) 100%);
+      z-index: 1;
+      opacity: 0.8;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: #fff;
+      max-width: 900px;
+      padding: 20px;
+    }
+    .hero-content h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 4rem;
+      margin-bottom: 20px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    .hero-content p {
+      font-size: 1.4rem;
+      margin-bottom: 30px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 15px 40px;
+      background: #ffce00;
+      color: #333;
+      border: none;
+      border-radius: 50px;
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: transform 0.3s, background 0.3s;
+    }
+    .btn:hover {
+      background: #e6b800;
+      transform: scale(1.05);
+    }
+
+    section {
+      padding: 120px 50px;
+      position: relative;
+    }
+    .section-title {
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 60px;
+      font-size: 2.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #333;
+      position: relative;
+    }
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 100px;
+      height: 4px;
+      background: #ffce00;
+      margin: 15px auto 0;
+      border-radius: 2px;
+    }
+
+    .services-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+    .service-item {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      flex: 1 1 300px;
+      max-width: 320px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .service-item:hover {
+      transform: translateY(-10px);
+    }
+    .service-item h3 {
+      font-family: 'Montserrat', sans-serif;
+      color: #ffce00;
+      margin-bottom: 15px;
+      font-size: 1.6rem;
+    }
+    .service-item p {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #555;
+    }
+
+    .about-content {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      align-items: center;
+    }
+    .about-text {
+      flex: 1;
+      font-size: 1.1rem;
+      color: #555;
+      line-height: 1.7;
+    }
+    .about-img {
+      flex: 1;
+      text-align: center;
+    }
+    .about-img img {
+      max-width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .features-container {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+    .feature-item {
+      background: #fff;
+      padding: 25px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      flex: 1 1 300px;
+      max-width: 320px;
+      text-align: center;
+    }
+    .feature-item h4 {
+      font-family: 'Montserrat', sans-serif;
+      color: #ffce00;
+      margin-bottom: 10px;
+      font-size: 1.4rem;
+    }
+    .feature-item p {
+      color: #666;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .testimonials-container {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      align-items: center;
+    }
+    .testimonial {
+      background: #fff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      max-width: 800px;
+      text-align: center;
+    }
+    .testimonial p {
+      font-style: italic;
+      margin-bottom: 15px;
+      color: #777;
+      font-size: 1.1rem;
+    }
+    .testimonial h4 {
+      font-family: 'Montserrat', sans-serif;
+      color: #333;
+      font-size: 1.2rem;
+    }
+  
+    .contact-info {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+      font-size: 1.1rem;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    footer {
+      background: #222;
+      color: #ccc;
+      padding: 25px 50px;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+      }
+      .hero-content h1 {
+        font-size: 2.8rem;
+      }
+      .about-content {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <div class="logo">
+        <a href="#">BrightEdge</a>
+      </div>
+      <div class="menu">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+  
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Empowering Your Digital Journey</h1>
+      <p>Innovative solutions, modern design, and strategy-driven growth – everything you need to transform your business.</p>
+      <a class="btn" href="#services">Explore Our Services</a>
+    </div>
+  </section>
+  
+  
+  <section id="services">
+    <div class="section-title">Our Services</div>
+    <div class="services-container">
+      <div class="service-item">
+        <h3>Digital Marketing</h3>
+        <p>Leverage cutting-edge strategies that drive traffic, enhance brand engagement, and deliver tangible results.</p>
+      </div>
+      <div class="service-item">
+        <h3>Consulting</h3>
+        <p>Gain actionable insights and tailored strategies to streamline your operations and accelerate growth.</p>
+      </div>
+      <div class="service-item">
+        <h3>Web Development</h3>
+        <p>Create visually stunning, responsive websites that captivate audiences and deliver seamless user experiences.</p>
+      </div>
+    </div>
+  </section>
+  
+
+  <section id="about">
+    <div class="section-title">About Us</div>
+    <div class="about-content">
+      <div class="about-text">
+        <p>At BrightEdge Digital Solutions, our passion is to fuse artistry with cutting-edge technology. With years of experience in digital strategy, our team creates tailor-made solutions that empower your business.</p>
+        <p>We believe in sustainable and measurable growth, putting creativity and innovation at the forefront of every project.</p>
+      </div>
+      <div class="about-img">
+        <img src="https://cdn.leonardo.ai/users/333d04db-46c1-41eb-916f-4f6de4a6ad45/generations/ea2a2ec4-1663-494b-a2bc-72611a7f025b/segments/2:4:1/Flux_Dev_A_diverse_team_of_professionals_collaborating_in_a_mo_1.jpeg" alt="Our team in action">
+      </div>
+    </div>
+  </section>
+  
+
+  <section id="features">
+    <div class="section-title">Why Choose Us</div>
+    <div class="features-container">
+      <div class="feature-item">
+        <h4>Innovative Strategy</h4>
+        <p>We combine data-driven insights with creative brilliance to create solutions that work.</p>
+      </div>
+      <div class="feature-item">
+        <h4>Expert Team</h4>
+        <p>Our specialists are industry veterans with a passion for delivering excellence.</p>
+      </div>
+      <div class="feature-item">
+        <h4>Proven Results</h4>
+        <p>Our commitment to performance and measurable outcomes speaks for itself.</p>
+      </div>
+    </div>
+  </section>
+  
+  
+  <section id="testimonials">
+    <div class="section-title">Testimonials</div>
+    <div class="testimonials-container">
+      <div class="testimonial">
+        <p>"BrightEdge completely transformed our digital footprint. Their unique blend of creativity and technical expertise delivered results that exceeded expectations."</p>
+        <h4>- Alex Johnson, CEO of TechNext</h4>
+      </div>
+      <div class="testimonial">
+        <p>"Working with BrightEdge was a turning point for our business. The team’s commitment and innovation brought us a competitive edge in a saturated market."</p>
+        <h4>- Samantha Lee, Marketing Director at InnovateCo</h4>
+      </div>
+    </div>
+  </section>
+  
+
+  <section id="contact">
+    <div class="section-title">Get in Touch</div>
+    <div class="contact-info">
+      <p>Ready to elevate your business to new heights? Connect with us and let’s create something extraordinary together.</p>
+      <p>Email: info@brightedge.com</p>
+      <p>Phone: +123 456 7890</p>
+      <p>Address: 123 Innovation Drive, Tech City, World</p>
+    </div>
+  </section>
+  
+
+  <footer>
+    <p>&copy; 2025 BrightEdge Digital Solutions. All rights reserved.</p>
+  </footer>
+  
+
+  <script>
+
+    gsap.registerPlugin(ScrollTrigger);
+    
+   
+    gsap.timeline()
+      .from("header", {duration: 1, y: -100, opacity: 0, ease: "power2.out"})
+      .from(".hero-content h1", {duration: 1.2, opacity: 0, y: 50, ease: "back.out(1.7)", delay: 0.3})
+      .from(".hero-content p", {duration: 1.2, opacity: 0, y: 50, ease: "back.out(1.7)"}, "-=0.8")
+      .from(".hero-content .btn", {duration: 1.2, opacity: 0, y: 50, ease: "back.out(1.7)"}, "-=0.8");
+    
+
+    document.querySelectorAll("section").forEach(section => {
+      gsap.from(section, {
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          toggleActions: "play none none none"
+        },
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        ease: "power2.out"
+      });
+    });
+    
+
+    gsap.from(".service-item", {
+      scrollTrigger: {
+        trigger: ".services-container",
+        start: "top 85%",
+      },
+      opacity: 0,
+      y: 30,
+      duration: 0.8,
+      ease: "power2.out",
+      stagger: 0.2
+    });
+    
+   
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        let target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 70,
+            behavior: "smooth"
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
